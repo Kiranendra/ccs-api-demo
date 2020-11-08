@@ -1,0 +1,29 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.main-container {
+    width: 75%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.heading {
+    font-size: 2em;
+    font-family: sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.corono-updates-container {
+    background-color: aqua;
+}
+
+.currency-updates-container {
+    background-color: brown;
+}
+
+.stocks-updates-container {
+    background-color: chartreuse;
+}
