@@ -14,6 +14,9 @@
     font-family: sans-serif;
     text-align: center;
     text-transform: uppercase;
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .corono-updates-container {
@@ -27,3 +30,18 @@
 .stocks-updates-container {
     background-color: chartreuse;
 }
+
+
+.covid-data-container {
+    text-align: left;
+}
+
+.table {
+    border: none;
+    border-collapse: separate;
+}
+
+.col-head {
+    border-left: 2px solid;
+}
+
