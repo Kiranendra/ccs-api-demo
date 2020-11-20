@@ -8,3 +8,6 @@ FOREIGN EXCHANGE RATES: https://fixer.io/
 GLOBAL STOCK MARKET: https://marketstack.com/
 
 */
+
+
+

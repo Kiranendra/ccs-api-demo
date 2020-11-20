@@ -32,16 +32,6 @@
 }
 
 
-.covid-data-container {
-    text-align: left;
-}
+.covid-data-container {}
 
-.table {
-    border: none;
-    border-collapse: separate;
-}
-
-.col-head {
-    border-left: 2px solid;
-}
 
