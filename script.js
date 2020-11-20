@@ -11,7 +11,8 @@ GLOBAL STOCK MARKET: https://marketstack.com/
 
 const covid_table = document.getElementById("covid-table")
 
-var covid_test_api = "https://api.covid19api.com/total/country/india"
+var covid_test_api = "https://api.covid19api.com/summary"
+var covid_data = null
 
 // Old method of sending and receiving requests
 let covid_request = new XMLHttpRequest()
@@ -19,44 +20,57 @@ covid_request.open("GET", covid_test_api)
 covid_request.send()
 covid_request.onload = () => {
     if (covid_request.status == 200) {
-        var covid_data = JSON.parse(covid_request.response)
-        // getting the latest data
-        covid_data = covid_data[covid_data.length-1]
-        var covid_date = covid_data["Date"]
+        covid_data = JSON.parse(covid_request.response)
+        addElements(covid_data["Countries"])
+    } else {
+        console.log("Error ${covid_request.status} ${covid_request.statusText}")
+    }
+}
+
+function addElements(data){
+    for (var index = 0; index < data.length; index++) {
+        var element = data[index]
+        var date = element["Date"]
 
         // creating the rows and columns to add data dynamically
         var covid_row = document.createElement('tr')
 
-        var covid_row_head = document.createElement('th')
-        covid_row_head.setAttribute('scope', 'row')
-        covid_row_head.innerText = covid_data["Country"]
+        var row_head = document.createElement('th')
+        row_head.setAttribute('scope', 'row')
+        row_head.innerText = element["Country"]
 
-        var covid_row_col_1 = document.createElement('td')
-        covid_row_col_1.innerText = covid_data["Active"]
+        var row_col_1 = document.createElement('td')
+        row_col_1.innerText = element["NewConfirmed"]
 
-        var covid_row_col_2 = document.createElement('td')
-        covid_row_col_2.innerText = covid_data["Confirmed"]
+        var row_col_2 = document.createElement('td')
+        row_col_2.innerText = element["TotalConfirmed"]
 
-        var covid_row_col_3 = document.createElement('td')
-        covid_row_col_3.innerText = covid_data["Recovered"]
+        var row_col_3 = document.createElement('td')
+        row_col_3.innerText = element["NewRecovered"]
 
-        var covid_row_col_4 = document.createElement('td')
-        covid_row_col_4.innerText = covid_data["Deaths"]
+        var row_col_4 = document.createElement('td')
+        row_col_4.innerText = element["TotalRecovered"]
 
-        var covid_row_col_5 = document.createElement('td')
-        covid_row_col_5.innerText = covid_date.substring(0, 10)
+        var row_col_5 = document.createElement('td')
+        row_col_5.innerText = element["NewDeaths"]
 
-        covid_row.appendChild(covid_row_head)
-        covid_row.appendChild(covid_row_col_1)
-        covid_row.appendChild(covid_row_col_2)
-        covid_row.appendChild(covid_row_col_3)
-        covid_row.appendChild(covid_row_col_4)
-        covid_row.appendChild(covid_row_col_5)
+        var row_col_6 = document.createElement('td')
+        row_col_6.innerText = element["TotalDeaths"]
+
+        var row_col_7 = document.createElement('td')
+        row_col_7.innerText = date.substring(0, 10)
+
+        covid_row.appendChild(row_head)
+        covid_row.appendChild(row_col_1)
+        covid_row.appendChild(row_col_2)
+        covid_row.appendChild(row_col_3)
+        covid_row.appendChild(row_col_4)
+        covid_row.appendChild(row_col_5)
+        covid_row.appendChild(row_col_6)
+        covid_row.appendChild(row_col_7)
 
         covid_table.appendChild(covid_row)
-        
-    } else {
-        console.log("Error ${covid_request.status} ${covid_request.statusText}")
+
     }
 }
 
