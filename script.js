@@ -31,7 +31,6 @@ function addElements(data){
     for (var index = 0; index < data.length; index++) {
         var element = data[index]
         var date = element["Date"]
-
         // creating the rows and columns to add data dynamically
         var covid_row = document.createElement('tr')
 
@@ -60,6 +59,7 @@ function addElements(data){
         var row_col_7 = document.createElement('td')
         row_col_7.innerText = date.substring(0, 10)
 
+        // adding the 'th' & 'td' tags to the 'tr'
         covid_row.appendChild(row_head)
         covid_row.appendChild(row_col_1)
         covid_row.appendChild(row_col_2)
@@ -69,8 +69,8 @@ function addElements(data){
         covid_row.appendChild(row_col_6)
         covid_row.appendChild(row_col_7)
 
+        // adding the 'tr' tag to the 'tbody'
         covid_table.appendChild(covid_row)
-
     }
 }
 

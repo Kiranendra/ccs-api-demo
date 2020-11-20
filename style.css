@@ -34,9 +34,10 @@
     background-color: chartreuse;
 }
 
-
 .covid-data-container {
     padding: 20px;
+    overflow-y: auto;
+    height: 500px;
 }
 
 
