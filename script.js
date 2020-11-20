@@ -9,6 +9,28 @@ GLOBAL STOCK MARKET: https://marketstack.com/
 
 */
 
+// API keys file path
+const filePath = "./APIs.txt"
+
+var ferKey = null
+var stockKey = null
+
+// getting API keys from the text file
+var file = new XMLHttpRequest()
+file.open("GET", filePath, false)
+file.onreadystatechange = function () {
+    if (file.readyState == 4) {
+        if (file.status == 200 || file.status == 0) {
+            let data = file.responseText.split('\n')
+            ferKey = data[1]
+            stockKey = data[2]
+            // console.log("Key-1: " + ferKey)
+            // console.log("Key-2: " + stockKey)
+        }
+    }
+}
+file.send(null)
+
 const covid_table = document.getElementById("covid-table")
 
 var covid_test_api = "https://api.covid19api.com/summary"
@@ -73,4 +95,3 @@ function addElementsCovid(data){
         covid_table.appendChild(covid_row)
     }
 }
-
