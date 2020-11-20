@@ -12,6 +12,16 @@ GLOBAL STOCK MARKET: https://marketstack.com/
 // API keys file path
 const filePath = "./APIs.txt"
 
+/* 
+
+The text file looks like this:
+
+// place other two APIs here
+Key_1
+Key_2
+
+*/
+
 var ferKey = null
 var stockKey = null
 
