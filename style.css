@@ -20,7 +20,10 @@
 }
 
 .corono-updates-container {
-    background-color: aqua;
+    border-style: dashed;
+    border-radius: 2px;
+    border-color: aqua;
+    
 }
 
 .currency-updates-container {
@@ -32,6 +35,8 @@
 }
 
 
-.covid-data-container {}
+.covid-data-container {
+    padding: 5px;
+}
 
 
