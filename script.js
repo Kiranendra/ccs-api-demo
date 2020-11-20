@@ -21,13 +21,13 @@ covid_request.send()
 covid_request.onload = () => {
     if (covid_request.status == 200) {
         covid_data = JSON.parse(covid_request.response)
-        addElements(covid_data["Countries"])
+        addElementsCovid(covid_data["Countries"])
     } else {
         console.log("Error ${covid_request.status} ${covid_request.statusText}")
     }
 }
 
-function addElements(data){
+function addElementsCovid(data){
     for (var index = 0; index < data.length; index++) {
         var element = data[index]
         var date = element["Date"]
