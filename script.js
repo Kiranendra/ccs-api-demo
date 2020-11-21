@@ -137,7 +137,27 @@ getFERData()
 
 function addElementsFER(rates, base, date) {
     for (let index = 0; index < Object.keys(rates).length; index++) {
-        console.log(Object.keys(rates)[index])
+        let fer_row = document.createElement('tr')
+
+        let row_col_1 = document.createElement('td')
+        row_col_1.innerText = base
+
+        let row_col_2 = document.createElement('td')
+        row_col_2.innerText = Object.keys(rates)[index]
+
+        let row_col_3 = document.createElement('td')
+        row_col_3.innerText = rates[Object.keys(rates)[index]]
+
+        let row_col_4 = document.createElement('td')
+        row_col_4.innerText = date
+
+        fer_row.appendChild(row_col_1)
+        fer_row.appendChild(row_col_2)
+        fer_row.appendChild(row_col_3)
+        fer_row.appendChild(row_col_4)
+
+        fer_table.appendChild(fer_row)
+
     }
 }
 
