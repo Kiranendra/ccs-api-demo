@@ -67,35 +67,35 @@ function getCovidData() {
 getCovidData()
 
 function addElementsCovid(data){
-    for (var index = 0; index < data.length; index++) {
-        var element = data[index]
-        var date = element["Date"]
+    for (let index = 0; index < data.length; index++) {
+        let element = data[index]
+        let date = element["Date"]
         // creating the rows and columns to add data dynamically
-        var covid_row = document.createElement('tr')
+        let covid_row = document.createElement('tr')
 
-        var row_head = document.createElement('th')
+        let row_head = document.createElement('th')
         row_head.setAttribute('scope', 'row')
         row_head.innerText = element["Country"]
 
-        var row_col_1 = document.createElement('td')
+        let row_col_1 = document.createElement('td')
         row_col_1.innerText = element["NewConfirmed"]
 
-        var row_col_2 = document.createElement('td')
+        let row_col_2 = document.createElement('td')
         row_col_2.innerText = element["TotalConfirmed"]
 
-        var row_col_3 = document.createElement('td')
+        let row_col_3 = document.createElement('td')
         row_col_3.innerText = element["NewRecovered"]
 
-        var row_col_4 = document.createElement('td')
+        let row_col_4 = document.createElement('td')
         row_col_4.innerText = element["TotalRecovered"]
 
-        var row_col_5 = document.createElement('td')
+        let row_col_5 = document.createElement('td')
         row_col_5.innerText = element["NewDeaths"]
 
-        var row_col_6 = document.createElement('td')
+        let row_col_6 = document.createElement('td')
         row_col_6.innerText = element["TotalDeaths"]
 
-        var row_col_7 = document.createElement('td')
+        let row_col_7 = document.createElement('td')
         row_col_7.innerText = date.substring(0, 10)
 
         // adding the 'th' & 'td' tags to the 'tr'
@@ -126,10 +126,7 @@ function getFERData() {
     fer_request.onload = () => {
         if (fer_request.status == 200) {
             fer_data = JSON.parse(fer_request.response)
-            // addElementsCovid(fer_data["Countries"])
-            console.log(fer_data["base"])
-            console.log(fer_data["date"])
-            console.log(fer_data["rates"])
+            addElementsFER(fer_data["rates"], fer_data["base"], fer_data["date"])
         } else {
             console.log("Error ${covid_request.status} ${covid_request.statusText}")
         }
@@ -137,5 +134,11 @@ function getFERData() {
 }
 
 getFERData()
+
+function addElementsFER(rates, base, date) {
+    console.log(Object.keys(rates).length)
+    console.log(base)
+    console.log(date)
+}
 
 // EXCHANGE SECTION -- END
