@@ -162,3 +162,69 @@ function addElementsFER(rates, base, date) {
 }
 
 // EXCHANGE SECTION -- END
+
+// STOCK SECTION -- START
+const stock_table = document.getElementById("stock-table")
+var stock_data = null
+
+function getStockData() {
+    // Old method of sending and receiving requests
+    let stock_request = new XMLHttpRequest()
+    stock_request.open("GET", stockKey)
+    stock_request.send()
+    stock_request.onload = () => {
+        if (stock_request.status == 200) {
+            stock_data = JSON.parse(stock_request.response)
+            addElementsStock(stock_data["data"])
+        } else {
+            console.log("Error ${covid_request.status} ${covid_request.statusText}")
+        }
+    }    
+}
+
+getStockData()
+
+function addElementsStock(data) {
+    for (let index = 0; index < data.length; index++) {
+        let element = stock_data["data"][index]
+        let date = element["date"]
+        let stock_row = document.createElement('tr')
+
+        let row_col_1 = document.createElement('td')
+        row_col_1.innerText = date.substring(0, 10)
+
+        let row_col_2 = document.createElement('td')
+        row_col_2.innerText = element["exchange"]
+
+        let row_col_3 = document.createElement('td')
+        row_col_3.innerText = element["symbol"]
+
+        let row_col_4 = document.createElement('td')
+        row_col_4.innerText = element["volume"]
+
+        let row_col_5 = document.createElement('td')
+        row_col_5.innerText = element["open"]
+
+        let row_col_6 = document.createElement('td')
+        row_col_6.innerText = element["high"]
+
+        let row_col_7 = document.createElement('td')
+        row_col_7.innerText = element["low"]
+
+        let row_col_8 = document.createElement('td')
+        row_col_8.innerText = element["close"]
+
+        stock_row.appendChild(row_col_1)
+        stock_row.appendChild(row_col_2)
+        stock_row.appendChild(row_col_3)
+        stock_row.appendChild(row_col_4)
+        stock_row.appendChild(row_col_5)
+        stock_row.appendChild(row_col_6)
+        stock_row.appendChild(row_col_7)
+        stock_row.appendChild(row_col_8)
+
+        stock_table.appendChild(stock_row)
+    }
+}
+
+// STOCK SECTION -- END
