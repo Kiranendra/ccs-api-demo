@@ -4,7 +4,7 @@ JSON DUMMY DATA: https://jsonplaceholder.typicode.com/
 TUTORIAL: https://levelup.gitconnected.com/all-possible-ways-of-making-an-api-call-in-plain-javascript-c0dee3c11b8b
 
 COVID API: https://covid19api.com/
-FOREIGN EXCHANGE RATES: https://fixer.io/
+FOREIGN EXCHANGE RATES: https://exchangeratesapi.io/
 GLOBAL STOCK MARKET: https://marketstack.com/
 
 */
@@ -16,48 +16,55 @@ const filePath = "./APIs.txt"
 
 The text file looks like this:
 
-// place other two APIs here
+// place APIs here
 Key_1
 Key_2
+Key_3
 
 */
-
+var covidKey = null
 var ferKey = null
 var stockKey = null
 
-// getting API keys from the text file
-var file = new XMLHttpRequest()
-file.open("GET", filePath, false)
-file.onreadystatechange = function () {
-    if (file.readyState == 4) {
-        if (file.status == 200 || file.status == 0) {
-            let data = file.responseText.split('\n')
-            ferKey = data[1]
-            stockKey = data[2]
-            // console.log("Key-1: " + ferKey)
-            // console.log("Key-2: " + stockKey)
+function getAPIKeys(path) {
+    // getting API keys from the text file
+    let file = new XMLHttpRequest()
+    file.open("GET", path, false)
+    file.onreadystatechange = function () {
+        if (file.readyState == 4) {
+            if (file.status == 200 || file.status == 0) {
+                let data = file.responseText.split('\n')
+                covidKey = data[1]
+                ferKey = data[2]
+                stockKey = data[3]
+            }
         }
     }
+    file.send(null)   
 }
-file.send(null)
 
+getAPIKeys(filePath)
+
+// COVID SECTION -- START
 const covid_table = document.getElementById("covid-table")
-
-var covid_test_api = "https://api.covid19api.com/summary"
 var covid_data = null
 
-// Old method of sending and receiving requests
-let covid_request = new XMLHttpRequest()
-covid_request.open("GET", covid_test_api)
-covid_request.send()
-covid_request.onload = () => {
-    if (covid_request.status == 200) {
-        covid_data = JSON.parse(covid_request.response)
-        addElementsCovid(covid_data["Countries"])
-    } else {
-        console.log("Error ${covid_request.status} ${covid_request.statusText}")
-    }
+function getCovidData() {
+    // Old method of sending and receiving requests
+    let covid_request = new XMLHttpRequest()
+    covid_request.open("GET", covidKey)
+    covid_request.send()
+    covid_request.onload = () => {
+        if (covid_request.status == 200) {
+            covid_data = JSON.parse(covid_request.response)
+            addElementsCovid(covid_data["Countries"])
+        } else {
+            console.log("Error ${covid_request.status} ${covid_request.statusText}")
+        }
+    }    
 }
+
+getCovidData()
 
 function addElementsCovid(data){
     for (var index = 0; index < data.length; index++) {
@@ -105,3 +112,30 @@ function addElementsCovid(data){
         covid_table.appendChild(covid_row)
     }
 }
+// COVID SECTION -- END
+
+// EXCHANGE SECTION -- START
+const fer_table = document.getElementById("fer-table")
+var fer_data = null
+
+function getFERData() {
+    // Old method of sending and receiving requests
+    let fer_request = new XMLHttpRequest()
+    fer_request.open("GET", ferKey)
+    fer_request.send()
+    fer_request.onload = () => {
+        if (fer_request.status == 200) {
+            fer_data = JSON.parse(fer_request.response)
+            // addElementsCovid(fer_data["Countries"])
+            console.log(fer_data["base"])
+            console.log(fer_data["date"])
+            console.log(fer_data["rates"])
+        } else {
+            console.log("Error ${covid_request.status} ${covid_request.statusText}")
+        }
+    }    
+}
+
+getFERData()
+
+// EXCHANGE SECTION -- END
