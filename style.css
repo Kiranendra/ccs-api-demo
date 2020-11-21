@@ -32,7 +32,9 @@
 }
 
 .stocks-updates-container {
-    background-color: chartreuse;
+    border-style: dashed;
+    border-radius: 2px;
+    border-color: aqua;
 }
 
 .data-container {
@@ -40,5 +42,3 @@
     overflow-y: auto;
     height: 500px;
 }
-
-
