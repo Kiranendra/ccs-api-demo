@@ -136,9 +136,9 @@ function getFERData() {
 getFERData()
 
 function addElementsFER(rates, base, date) {
-    console.log(Object.keys(rates).length)
-    console.log(base)
-    console.log(date)
+    for (let index = 0; index < Object.keys(rates).length; index++) {
+        console.log(Object.keys(rates)[index])
+    }
 }
 
 // EXCHANGE SECTION -- END
