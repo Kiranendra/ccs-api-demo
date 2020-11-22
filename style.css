@@ -19,22 +19,11 @@
     padding-bottom: 5px;
 }
 
-.corono-updates-container {
-    border-style: dashed;
+.updates-container {
+    border-style: dotted;
     border-radius: 2px;
     border-color: aqua;
-}
-
-.currency-updates-container {
-    border-style: dashed;
-    border-radius: 2px;
-    border-color: aqua;
-}
-
-.stocks-updates-container {
-    border-style: dashed;
-    border-radius: 2px;
-    border-color: aqua;
+    margin-bottom: 10px;
 }
 
 .data-container {

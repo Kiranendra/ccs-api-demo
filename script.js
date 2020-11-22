@@ -49,27 +49,11 @@ getAPIKeys(filePath)
 const covid_table = document.getElementById("covid-table")
 var covid_data = null
 
-function getCovidData() {
-    // Old method of sending and receiving requests
-    let covid_request = new XMLHttpRequest()
-    covid_request.open("GET", covidKey)
-    covid_request.send()
-    covid_request.onload = () => {
-        if (covid_request.status == 200) {
-            covid_data = JSON.parse(covid_request.response)
-            addElementsCovid(covid_data["Countries"])
-        } else {
-            console.log("Error ${covid_request.status} ${covid_request.statusText}")
-        }
-    }    
-}
-
-getCovidData()
-
 function addElementsCovid(data){
     for (let index = 0; index < data.length; index++) {
         let element = data[index]
         let date = element["Date"]
+
         // creating the rows and columns to add data dynamically
         let covid_row = document.createElement('tr')
 
@@ -112,11 +96,57 @@ function addElementsCovid(data){
         covid_table.appendChild(covid_row)
     }
 }
+
+function getCovidData() {
+    // Old method of sending and receiving requests
+    let covid_request = new XMLHttpRequest()
+    covid_request.open("GET", covidKey)
+    covid_request.send()
+    covid_request.onload = () => {
+        if (covid_request.status == 200) {
+            covid_data = JSON.parse(covid_request.response)
+            addElementsCovid(covid_data["Countries"])
+        } else {
+            console.log("Error ${covid_request.status} ${covid_request.statusText}")
+        }
+    }    
+}
+
+getCovidData()
+
 // COVID SECTION -- END
 
 // EXCHANGE SECTION -- START
 const fer_table = document.getElementById("fer-table")
 var fer_data = null
+
+function addElementsFER(rates, base, date) {
+    for (let index = 0; index < Object.keys(rates).length; index++) {
+        // creating the rows and columns to add data dynamically
+        let fer_row = document.createElement('tr')
+
+        let row_col_1 = document.createElement('td')
+        row_col_1.innerText = base
+
+        let row_col_2 = document.createElement('td')
+        row_col_2.innerText = Object.keys(rates)[index]
+
+        let row_col_3 = document.createElement('td')
+        row_col_3.innerText = rates[Object.keys(rates)[index]]
+
+        let row_col_4 = document.createElement('td')
+        row_col_4.innerText = date
+
+        // appending the 'th' & 'td' tags to the 'tr'
+        fer_row.appendChild(row_col_1)
+        fer_row.appendChild(row_col_2)
+        fer_row.appendChild(row_col_3)
+        fer_row.appendChild(row_col_4)
+
+        // appending the 'tr' tag to the 'tbody'
+        fer_table.appendChild(fer_row)
+    }
+}
 
 function getFERData() {
     // Old method of sending and receiving requests
@@ -135,59 +165,18 @@ function getFERData() {
 
 getFERData()
 
-function addElementsFER(rates, base, date) {
-    for (let index = 0; index < Object.keys(rates).length; index++) {
-        let fer_row = document.createElement('tr')
-
-        let row_col_1 = document.createElement('td')
-        row_col_1.innerText = base
-
-        let row_col_2 = document.createElement('td')
-        row_col_2.innerText = Object.keys(rates)[index]
-
-        let row_col_3 = document.createElement('td')
-        row_col_3.innerText = rates[Object.keys(rates)[index]]
-
-        let row_col_4 = document.createElement('td')
-        row_col_4.innerText = date
-
-        fer_row.appendChild(row_col_1)
-        fer_row.appendChild(row_col_2)
-        fer_row.appendChild(row_col_3)
-        fer_row.appendChild(row_col_4)
-
-        fer_table.appendChild(fer_row)
-
-    }
-}
-
 // EXCHANGE SECTION -- END
 
 // STOCK SECTION -- START
 const stock_table = document.getElementById("stock-table")
 var stock_data = null
 
-function getStockData() {
-    // Old method of sending and receiving requests
-    let stock_request = new XMLHttpRequest()
-    stock_request.open("GET", stockKey)
-    stock_request.send()
-    stock_request.onload = () => {
-        if (stock_request.status == 200) {
-            stock_data = JSON.parse(stock_request.response)
-            addElementsStock(stock_data["data"])
-        } else {
-            console.log("Error ${covid_request.status} ${covid_request.statusText}")
-        }
-    }    
-}
-
-getStockData()
-
 function addElementsStock(data) {
     for (let index = 0; index < data.length; index++) {
         let element = stock_data["data"][index]
         let date = element["date"]
+
+        // creating the rows and columns to add data dynamically
         let stock_row = document.createElement('tr')
 
         let row_col_1 = document.createElement('td')
@@ -214,6 +203,7 @@ function addElementsStock(data) {
         let row_col_8 = document.createElement('td')
         row_col_8.innerText = element["close"]
 
+        // appending the 'th' & 'td' tags to the 'tr'
         stock_row.appendChild(row_col_1)
         stock_row.appendChild(row_col_2)
         stock_row.appendChild(row_col_3)
@@ -223,8 +213,26 @@ function addElementsStock(data) {
         stock_row.appendChild(row_col_7)
         stock_row.appendChild(row_col_8)
 
+        // appending the 'tr' tag to the 'tbody'
         stock_table.appendChild(stock_row)
     }
 }
+
+function getStockData() {
+    // Old method of sending and receiving requests
+    let stock_request = new XMLHttpRequest()
+    stock_request.open("GET", stockKey)
+    stock_request.send()
+    stock_request.onload = () => {
+        if (stock_request.status == 200) {
+            stock_data = JSON.parse(stock_request.response)
+            addElementsStock(stock_data["data"])
+        } else {
+            console.log("Error ${covid_request.status} ${covid_request.statusText}")
+        }
+    }    
+}
+
+getStockData()
 
 // STOCK SECTION -- END
